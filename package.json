@@ -1,6 +1,6 @@
 {
   "name": "simple-in-memory-cache",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "A simple in-memory cache, for nodejs and the browser, with time based expiration policies.",
   "author": "UladKasach @uladkasach",
   "license": "MIT",
