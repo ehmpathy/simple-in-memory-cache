@@ -1,15 +1,25 @@
-export interface SimpleInMemoryCache {
-  [index: string]: { value: any; expiresAtMse: number };
+export interface SimpleInMemoryCache<T> {
+  get: (key: string) => T | undefined;
+  set: (
+    key: string,
+    value: T,
+    options?: { secondsUntilExpiration?: number },
+  ) => void;
+}
+
+
+export interface SimpleInMemoryCacheState<T> {
+  [index: string]: { value: T; expiresAtMse: number };
 }
 
 const getMseNow = () => new Date().getTime();
 
-export const createCache = ({ defaultSecondsUntilExpiration = 5 * 60 }: { defaultSecondsUntilExpiration?: number } = {}) => {
+export const createCache = <T>({ defaultSecondsUntilExpiration = 5 * 60 }: { defaultSecondsUntilExpiration?: number } = {}): SimpleInMemoryCache<T> => {
   // initialize a fresh in-memory cache object
-  const cache: SimpleInMemoryCache = {};
+  const cache: SimpleInMemoryCacheState<T> = {};
 
   // define how to set an item into the cache
-  const set = (key: string, value: any, { secondsUntilExpiration = defaultSecondsUntilExpiration }: { secondsUntilExpiration?: number } = {}) => {
+  const set = (key: string, value: T, { secondsUntilExpiration = defaultSecondsUntilExpiration }: { secondsUntilExpiration?: number } = {}) => {
     const expiresAtMse = getMseNow() + secondsUntilExpiration * 1000;
     cache[key] = { value, expiresAtMse };
   };
