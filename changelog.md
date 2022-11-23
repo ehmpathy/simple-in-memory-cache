@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.2.1](https://www.github.com/ehmpathy/simple-in-memory-cache/compare/v0.2.0...v0.2.1) (2022-11-23)
+
+
+### Bug Fixes
+
+* **cicd:** add test:format script to unblock ghactions ([f4f645c](https://www.github.com/ehmpathy/simple-in-memory-cache/commit/f4f645ce6ec9d44ea44a2f175f5fbcdddbacd45f))
+
 ## [0.2.0](https://www.github.com/ehmpathy/simple-in-memory-cache/compare/v0.1.0...v0.2.0) (2022-11-23)
 
 
