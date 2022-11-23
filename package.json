@@ -5,7 +5,7 @@
   "author": "UladKasach @uladkasach",
   "license": "MIT",
   "repository": "uladkasach/simple-in-memory-cache",
-  "homepage": "https://github.com/uladkasach/simple-in-memory-cache",
+  "homepage": "https://github.com/ehmpathy/simple-in-memory-cache",
   "keywords": [
     "cache",
     "memory",
@@ -20,7 +20,7 @@
     "ttl",
     "expiration"
   ],
-  "bugs": "https://github.com/uladkasach/simple-in-memory-cache/issues",
+  "bugs": "https://github.com/ehmpathy/simple-in-memory-cache/issues",
   "main": "dist/index.js",
   "engines": {
     "node": ">=8.0.0"

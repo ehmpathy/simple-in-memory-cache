@@ -1,7 +1,7 @@
 # simple-in-memory-cache
 
-![ci_on_commit](https://github.com/uladkasach/simple-in-memory-cache/workflows/ci_on_commit/badge.svg)
-![deploy_on_tag](https://github.com/uladkasach/simple-in-memory-cache/workflows/deploy_on_tag/badge.svg)
+![ci_on_commit](https://github.com/ehmpathy/simple-in-memory-cache/workflows/ci_on_commit/badge.svg)
+![deploy_on_tag](https://github.com/ehmpathy/simple-in-memory-cache/workflows/deploy_on_tag/badge.svg)
 
 A simple in-memory cache, for nodejs and the browser, with time based expiration policies.
 
