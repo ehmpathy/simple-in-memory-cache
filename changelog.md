@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://www.github.com/ehmpathy/simple-in-memory-cache/compare/v0.2.1...v0.3.0) (2022-11-24)
+
+
+### Features
+
+* **keys:** enable accurate retrieval of all valid cache keys ([5a70816](https://www.github.com/ehmpathy/simple-in-memory-cache/commit/5a708160850be4460f421ef39573ea54da17fbb2))
+
 ### [0.2.1](https://www.github.com/ehmpathy/simple-in-memory-cache/compare/v0.2.0...v0.2.1) (2022-11-23)
 
 
