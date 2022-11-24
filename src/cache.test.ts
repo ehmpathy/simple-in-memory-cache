@@ -51,4 +51,32 @@ describe('cache', () => {
     const iceCreamStateAfter5Sec = get('ice cream state');
     expect(iceCreamStateAfter5Sec).toEqual(undefined); // no longer defined, since the item level seconds until expiration was 5
   });
+  it('should accurately get keys', () => {
+    // create the cache
+    const { set, keys } = createCache();
+
+    // check key is added when value is set
+    set('meaning-of-life', '42');
+    const keys1 = keys();
+    expect(keys1.length).toEqual(1);
+    expect(keys1[0]).toEqual('meaning-of-life');
+
+    // check that there are no duplicates when key value is updated
+    set('meaning-of-life', '42.0');
+    const keys2 = keys();
+    expect(keys2.length).toEqual(1);
+    expect(keys2[0]).toEqual('meaning-of-life');
+
+    // check that multiple keys can be set
+    set('purpose-of-life', 'propagation');
+    const keys3 = keys();
+    expect(keys3.length).toEqual(2);
+    expect(keys3[1]).toEqual('purpose-of-life');
+
+    // check that invalidation removes the key
+    set('meaning-of-life', undefined);
+    const keys4 = keys();
+    expect(keys4.length).toEqual(1);
+    expect(keys4[0]).toEqual('purpose-of-life');
+  });
 });
