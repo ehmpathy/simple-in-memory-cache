@@ -33,6 +33,24 @@ describe('cache', () => {
     const popcornStatusAfter10Sec = get('how popped is the popcorn?');
     expect(popcornStatusAfter10Sec).toEqual(undefined); // no longer defined, since the default seconds until expiration was 15
   });
+  it('should respect the default expiration for the cache set by shorthand alias', async () => {
+    const { set, get } = createCache({ seconds: 10 }); // we're gonna use this cache to keep track of the popcorn in the microwave - we should check more regularly since it changes quickly!
+    set('how popped is the popcorn?', 'not popped');
+
+    // prove that we recorded the value and its accessible immediately after setting
+    const popcornStatus = get('how popped is the popcorn?');
+    expect(popcornStatus).toEqual('not popped');
+
+    // prove that the value is still accessible after 9 seconds, since default ttl is 10 seconds
+    await sleep(9 * 1000);
+    const popcornStatusAfter9Sec = get('how popped is the popcorn?');
+    expect(popcornStatusAfter9Sec).toEqual('not popped'); // still should say not popped
+
+    // and prove that after a total of 9 seconds, the status is no longer in the cache
+    await sleep(1 * 1000); // sleep 1 more second
+    const popcornStatusAfter10Sec = get('how popped is the popcorn?');
+    expect(popcornStatusAfter10Sec).toEqual(undefined); // no longer defined, since the default seconds until expiration was 15
+  });
   it('should respect the item level expiration for the cache', async () => {
     const { set, get } = createCache(); // remember, default expiration is greater than 1 min
     set('ice cream state', 'solid', { secondsUntilExpiration: 5 }); // ice cream changes quickly in the heat! lets keep a quick eye on this

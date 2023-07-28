@@ -10,9 +10,26 @@ export interface SimpleInMemoryCacheState<T> {
 
 const getMseNow = () => new Date().getTime();
 
-export const createCache = <T>({ defaultSecondsUntilExpiration = 5 * 60 }: { defaultSecondsUntilExpiration?: number } = {}): SimpleInMemoryCache<
-  T
-> => {
+export const createCache = <T>({
+  seconds,
+  defaultSecondsUntilExpiration: defaultSecondsUntilExpirationInput,
+}: {
+  /**
+   * the number of seconds items in the cache expire after
+   */
+  defaultSecondsUntilExpiration?: number;
+
+  /**
+   * a shorthand alias for `defaultSecondsUntilExpiration`
+   *
+   * note
+   * - if both options are set, `defaultSecondsUntilExpirationInput` takes precedence
+   */
+  seconds?: number;
+} = {}): SimpleInMemoryCache<T> => {
+  // resolve input alias
+  const defaultSecondsUntilExpiration = defaultSecondsUntilExpirationInput ?? seconds ?? 5 * 60;
+
   // initialize a fresh in-memory cache object
   const cache: SimpleInMemoryCacheState<T> = {};
 
