@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.3.1](https://www.github.com/ehmpathy/simple-in-memory-cache/compare/v0.3.0...v0.3.1) (2023-07-28)
+
+
+### Bug Fixes
+
+* **inputs:** add seconds as alias to defaultSecondsUntilExpiration ([4ad0a09](https://www.github.com/ehmpathy/simple-in-memory-cache/commit/4ad0a09aca6a959de8226ef5b8cc0f303efbb0da))
+
 ## [0.3.0](https://www.github.com/ehmpathy/simple-in-memory-cache/compare/v0.2.1...v0.3.0) (2022-11-24)
 
 
