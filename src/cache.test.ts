@@ -11,8 +11,13 @@ describe('cache', () => {
   });
   it('should be able to get an item from the cache', () => {
     const { set, get } = createCache();
-    set('how many licks does it take to get to the center of a tootsie pop?', 3);
-    const licks = get('how many licks does it take to get to the center of a tootsie pop?');
+    set(
+      'how many licks does it take to get to the center of a tootsie pop?',
+      3,
+    );
+    const licks = get(
+      'how many licks does it take to get to the center of a tootsie pop?',
+    );
     expect(licks).toEqual(3);
   });
   it('should respect the default expiration for the cache', async () => {

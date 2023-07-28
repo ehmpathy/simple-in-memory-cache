@@ -1,6 +1,10 @@
 export interface SimpleInMemoryCache<T> {
   get: (key: string) => T | undefined;
-  set: (key: string, value: T, options?: { secondsUntilExpiration?: number }) => void;
+  set: (
+    key: string,
+    value: T,
+    options?: { secondsUntilExpiration?: number },
+  ) => void;
   keys: () => string[];
 }
 
@@ -28,7 +32,8 @@ export const createCache = <T>({
   seconds?: number;
 } = {}): SimpleInMemoryCache<T> => {
   // resolve input alias
-  const defaultSecondsUntilExpiration = defaultSecondsUntilExpirationInput ?? seconds ?? 5 * 60;
+  const defaultSecondsUntilExpiration =
+    defaultSecondsUntilExpirationInput ?? seconds ?? 5 * 60;
 
   // initialize a fresh in-memory cache object
   const cache: SimpleInMemoryCacheState<T> = {};
@@ -37,7 +42,9 @@ export const createCache = <T>({
   const set = (
     key: string,
     value: T | undefined,
-    { secondsUntilExpiration = defaultSecondsUntilExpiration }: { secondsUntilExpiration?: number } = {},
+    {
+      secondsUntilExpiration = defaultSecondsUntilExpiration,
+    }: { secondsUntilExpiration?: number } = {},
   ) => {
     // handle cache invalidation
     if (value === undefined) {
