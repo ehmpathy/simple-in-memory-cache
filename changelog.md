@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.2](https://github.com/ehmpathy/simple-in-memory-cache/compare/v0.3.1...v0.3.2) (2024-09-01)
+
+
+### Bug Fixes
+
+* **expire:** expiration of 0 seconds should be immediate ([3940775](https://github.com/ehmpathy/simple-in-memory-cache/commit/3940775a2281bacd724ed448d14f04152442a7f2))
+
 ## [0.3.1](https://github.com/ehmpathy/simple-in-memory-cache/compare/v0.3.0...v0.3.1) (2023-07-28)
 
 
