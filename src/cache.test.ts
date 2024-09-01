@@ -74,6 +74,23 @@ describe('cache', () => {
     const iceCreamStateAfter5Sec = get('ice cream state');
     expect(iceCreamStateAfter5Sec).toEqual(undefined); // no longer defined, since the item level seconds until expiration was 5
   });
+  it('should consider secondsUntilExpiration of null or infinity as never expiring', async () => {
+    const { set, get } = createCache({
+      defaultSecondsUntilExpiration: 0, // expire immediately
+    });
+
+    // prove that setting something to the cache with default state will have it expired immediately
+    await set('dory-memory', 'something'); // lets see if dory can remember something
+    const doryMemory = await get('dory-memory');
+    expect(doryMemory).toEqual(undefined); // its already gone! dang default expiration
+
+    // prove that if we record the memory with expires-at Infinity, it persists
+    await set('elephant-memory', 'something', {
+      secondsUntilExpiration: Infinity,
+    });
+    const elephantMemory = await get('elephant-memory');
+    expect(elephantMemory).toEqual('something');
+  });
   it('should accurately get keys', () => {
     // create the cache
     const { set, keys } = createCache();

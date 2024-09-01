@@ -1,9 +1,13 @@
+import type { PickOne } from 'type-fns';
+
 export interface SimpleInMemoryCache<T> {
   get: (key: string) => T | undefined;
   set: (
     key: string,
     value: T,
-    options?: { secondsUntilExpiration?: number },
+    options?: Partial<
+      PickOne<{ secondsUntilExpiration?: number; seconds?: number }>
+    >,
   ) => void;
   keys: () => string[];
 }
@@ -17,20 +21,22 @@ const getMseNow = () => new Date().getTime();
 export const createCache = <T>({
   seconds,
   defaultSecondsUntilExpiration: defaultSecondsUntilExpirationInput,
-}: {
-  /**
-   * the number of seconds items in the cache expire after
-   */
-  defaultSecondsUntilExpiration?: number;
+}: Partial<
+  PickOne<{
+    /**
+     * the number of seconds items in the cache expire after
+     */
+    defaultSecondsUntilExpiration?: number;
 
-  /**
-   * a shorthand alias for `defaultSecondsUntilExpiration`
-   *
-   * note
-   * - if both options are set, `defaultSecondsUntilExpirationInput` takes precedence
-   */
-  seconds?: number;
-} = {}): SimpleInMemoryCache<T> => {
+    /**
+     * a shorthand alias for `defaultSecondsUntilExpiration`
+     *
+     * note
+     * - if both options are set, `defaultSecondsUntilExpirationInput` takes precedence
+     */
+    seconds?: number;
+  }>
+> = {}): SimpleInMemoryCache<T> => {
   // resolve input alias
   const defaultSecondsUntilExpiration =
     defaultSecondsUntilExpirationInput ?? seconds ?? 5 * 60;
@@ -61,7 +67,7 @@ export const createCache = <T>({
   const get = (key: string) => {
     const cacheContent = cache[key];
     if (!cacheContent) return undefined; // if not in cache, then undefined
-    if (cacheContent.expiresAtMse < getMseNow()) return undefined; // if already expired, then undefined
+    if (cacheContent.expiresAtMse <= getMseNow()) return undefined; // if already expired, then undefined
     return cacheContent.value; // otherwise, its in the cache and not expired, so return the value
   };
 
