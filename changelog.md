@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.3](https://github.com/ehmpathy/simple-in-memory-cache/compare/v0.3.2...v0.3.3) (2024-09-01)
+
+
+### Bug Fixes
+
+* **cicd:** remove test commmits while best practs upgrade paused ([f2826fa](https://github.com/ehmpathy/simple-in-memory-cache/commit/f2826fa88f78fb6231d50de04e54fc17e66b5be1))
+* **practs:** bump practs to latest best ([#7](https://github.com/ehmpathy/simple-in-memory-cache/issues/7)) ([33e3784](https://github.com/ehmpathy/simple-in-memory-cache/commit/33e378426918a2a68c25a9ea3e295845a354a967))
+
 ## [0.3.2](https://github.com/ehmpathy/simple-in-memory-cache/compare/v0.3.1...v0.3.2) (2024-09-01)
 
 

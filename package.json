@@ -2,7 +2,7 @@
   "name": "simple-in-memory-cache",
   "author": "ehmpathy",
   "description": "A simple in-memory cache, for nodejs and the browser, with time based expiration policies.",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "repository": "ehmpathy/simple-in-memory-cache",
   "homepage": "https://github.com/ehmpathy/simple-in-memory-cache",
   "keywords": [
