@@ -1,13 +1,11 @@
-import type { PickOne } from 'type-fns';
+import { toMilliseconds, UniDuration } from '@ehmpathy/uni-time';
 
 export interface SimpleInMemoryCache<T> {
   get: (key: string) => T | undefined;
   set: (
     key: string,
     value: T,
-    options?: Partial<
-      PickOne<{ secondsUntilExpiration?: number; seconds?: number }>
-    >,
+    options?: { expiration?: UniDuration | null },
   ) => void;
   keys: () => string[];
 }
@@ -18,29 +16,13 @@ export interface SimpleInMemoryCacheState<T> {
 
 const getMseNow = () => new Date().getTime();
 
-export const createCache = <T>({
-  seconds,
-  defaultSecondsUntilExpiration: defaultSecondsUntilExpirationInput,
-}: Partial<
-  PickOne<{
-    /**
-     * the number of seconds items in the cache expire after
-     */
-    defaultSecondsUntilExpiration?: number;
-
-    /**
-     * a shorthand alias for `defaultSecondsUntilExpiration`
-     *
-     * note
-     * - if both options are set, `defaultSecondsUntilExpirationInput` takes precedence
-     */
-    seconds?: number;
-  }>
-> = {}): SimpleInMemoryCache<T> => {
-  // resolve input alias
-  const defaultSecondsUntilExpiration =
-    defaultSecondsUntilExpirationInput ?? seconds ?? 5 * 60;
-
+export const createCache = <T>(
+  {
+    expiration: defaultExpiration,
+  }: {
+    expiration?: UniDuration | null;
+  } = { expiration: { minutes: 5 } },
+): SimpleInMemoryCache<T> => {
   // initialize a fresh in-memory cache object
   const cache: SimpleInMemoryCacheState<T> = {};
 
@@ -49,8 +31,8 @@ export const createCache = <T>({
     key: string,
     value: T | undefined,
     {
-      secondsUntilExpiration = defaultSecondsUntilExpiration,
-    }: { secondsUntilExpiration?: number } = {},
+      expiration = defaultExpiration,
+    }: { expiration?: UniDuration | null } = {},
   ) => {
     // handle cache invalidation
     if (value === undefined) {
@@ -59,7 +41,8 @@ export const createCache = <T>({
     }
 
     // handle setting
-    const expiresAtMse = getMseNow() + secondsUntilExpiration * 1000;
+    const expiresAtMse =
+      getMseNow() + (expiration ? toMilliseconds(expiration) : Infinity); // infinity if null
     cache[key] = { value, expiresAtMse };
   };
 
