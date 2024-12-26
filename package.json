@@ -87,5 +87,8 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "dependencies": {
+    "@ehmpathy/uni-time": "^1.7.4"
   }
 }
