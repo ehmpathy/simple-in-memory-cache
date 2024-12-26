@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/ehmpathy/simple-in-memory-cache/compare/v0.3.3...v0.4.0) (2024-12-26)
+
+
+### Features
+
+* **terms:** use uni-time glossary for duration term ([#9](https://github.com/ehmpathy/simple-in-memory-cache/issues/9)) ([b80e053](https://github.com/ehmpathy/simple-in-memory-cache/commit/b80e053978f6717cfbfd525f6c7a4f034f07f87c))
+
 ## [0.3.3](https://github.com/ehmpathy/simple-in-memory-cache/compare/v0.3.2...v0.3.3) (2024-09-01)
 
 
