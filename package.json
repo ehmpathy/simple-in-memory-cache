@@ -88,6 +88,6 @@
     }
   },
   "dependencies": {
-    "@ehmpathy/uni-time": "^1.7.4"
+    "iso-time": "^1.11.1"
   }
 }
