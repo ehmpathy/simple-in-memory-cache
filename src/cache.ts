@@ -1,11 +1,11 @@
-import { toMilliseconds, UniDuration } from '@ehmpathy/uni-time';
+import { toMilliseconds, IsoDuration } from 'iso-time';
 
 export interface SimpleInMemoryCache<T> {
   get: (key: string) => T | undefined;
   set: (
     key: string,
     value: T,
-    options?: { expiration?: UniDuration | null },
+    options?: { expiration?: IsoDuration | null },
   ) => void;
   keys: () => string[];
 }
@@ -20,7 +20,7 @@ export const createCache = <T>(
   {
     expiration: defaultExpiration,
   }: {
-    expiration?: UniDuration | null;
+    expiration?: IsoDuration | null;
   } = { expiration: { minutes: 5 } },
 ): SimpleInMemoryCache<T> => {
   // initialize a fresh in-memory cache object
@@ -32,7 +32,7 @@ export const createCache = <T>(
     value: T | undefined,
     {
       expiration = defaultExpiration,
-    }: { expiration?: UniDuration | null } = {},
+    }: { expiration?: IsoDuration | null } = {},
   ) => {
     // handle cache invalidation
     if (value === undefined) {
