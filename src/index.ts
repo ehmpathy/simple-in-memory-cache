@@ -1,1 +1,2 @@
-export { createCache, SimpleInMemoryCache } from './cache';
+export type { SimpleInMemoryCache } from './cache';
+export { createCache } from './cache';
