@@ -1,4 +1,4 @@
-import { toMilliseconds, IsoDuration } from 'iso-time';
+import { type IsoDuration, toMilliseconds } from 'iso-time';
 
 export interface SimpleInMemoryCache<T> {
   get: (key: string) => T | undefined;
@@ -17,11 +17,9 @@ export interface SimpleInMemoryCacheState<T> {
 const getMseNow = () => new Date().getTime();
 
 export const createCache = <T>(
-  {
-    expiration: defaultExpiration,
-  }: {
-    expiration?: IsoDuration | null;
-  } = { expiration: { minutes: 5 } },
+  { expiration: defaultExpiration }: { expiration?: IsoDuration | null } = {
+    expiration: { minutes: 5 },
+  },
 ): SimpleInMemoryCache<T> => {
   // initialize a fresh in-memory cache object
   const cache: SimpleInMemoryCacheState<T> = {};

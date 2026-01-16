@@ -10,9 +10,24 @@
     "resolveJsonModule": true,
     "sourceMap": true,
     "outDir": "dist",
-    "target": "es6"
+    "target": "es2020",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "*"
+      ],
+      "@src/*": [
+        "src/*"
+      ]
+    },
+    "incremental": true,
+    "module": "commonjs",
+    "moduleResolution": "node"
   },
-  "extends": "@tsconfig/node-lts-strictest/tsconfig.json",
+  "extends": [
+    "@tsconfig/strictest/tsconfig.json",
+    "@tsconfig/node20/tsconfig.json"
+  ],
   "include": [
     "**/*.ts"
   ],
