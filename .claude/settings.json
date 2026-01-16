@@ -6,12 +6,6 @@
         "hooks": [
           {
             "type": "command",
-            "command": "./node_modules/.bin/rhachet run --repo ehmpathy --role mechanic --init claude.hooks/sessionstart.notify-permissions",
-            "timeout": 5,
-            "author": "repo=ehmpathy/role=mechanic"
-          },
-          {
-            "type": "command",
             "command": "./node_modules/.bin/rhachet roles boot --repo .this --role any --if-present",
             "timeout": 60,
             "author": "repo=ehmpathy/role=mechanic"
@@ -20,6 +14,12 @@
             "type": "command",
             "command": "./node_modules/.bin/rhachet roles boot --repo ehmpathy --role mechanic",
             "timeout": 60,
+            "author": "repo=ehmpathy/role=mechanic"
+          },
+          {
+            "type": "command",
+            "command": "./node_modules/.bin/rhachet run --repo ehmpathy --role mechanic --init claude.hooks/sessionstart.notify-permissions",
+            "timeout": 5,
             "author": "repo=ehmpathy/role=mechanic"
           }
         ]
