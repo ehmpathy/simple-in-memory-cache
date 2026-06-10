@@ -64,6 +64,9 @@ jobs:
           path: ./node_modules
           key: ${{ needs.install.outputs.node-modules-cache-key }}
 
+      - name: build
+        run: npm run build # build before test:types, to ensure .dist/ artifacts are importable for blackbox tests
+
       - name: test:types
         run: npm run test:types
 
@@ -198,6 +201,21 @@ jobs:
           path: ./node_modules
           key: ${{ needs.install.outputs.node-modules-cache-key }}
 
+      # .why = keyrack.yml can extend other manifests via symlinks (e.g., .agent/repo=ehmpathy/role=mechanic/keyrack.yml)
+      #        prepare:rhachet creates these symlinks so keyrack.source() can hydrate extended keys
+      - name: prepare:rhachet
+        run: npm run prepare:rhachet --if-present
+
+      # .why = keyrack firewall translates and validates secrets before tests run
+      #        - filters to declared keys in keyrack.yml
+      #        - translates mechanisms (e.g., GitHub App → ghs_* token)
+      #        - blocks dangerous patterns (ghp_*, AKIA*, etc.)
+      #        - exports to $GITHUB_ENV with mask applied
+      - name: keyrack firewall
+        run: npx rhachet keyrack firewall --env test --from 'json(env://SECRETS_JSON)' --into github.actions
+        env:
+          SECRETS_JSON: ${{ toJSON(secrets) }}
+
       - name: get aws auth, if creds supplied
         if: ${{ inputs.creds-aws-role-arn }}
         uses: aws-actions/configure-aws-credentials@v4
@@ -217,12 +235,14 @@ jobs:
       - name: test:integration (explicit ${{ matrix.shard.index }})
         if: matrix.shard.type == 'explicit'
         run: |
+          set -eu
           patterns='${{ join(matrix.shard.patterns, '|') }}'
-          THOROUGH=true npm run test:integration -- --testPathPattern="$patterns" --json --outputFile=jest-results.json
+          THOROUGH=true npm run test:integration -- --testPathPatterns="$patterns" --json --outputFile=jest-results.json
 
       - name: test:integration (dynamic ${{ matrix.shard.shard }}/${{ matrix.shard.total }})
         if: matrix.shard.type == 'dynamic'
         run: |
+          set -eu
           exclude='${{ needs.enshard.outputs.integration-patterns }}'
           if [[ -n "$exclude" ]]; then
             THOROUGH=true npm run test:integration -- --testPathIgnorePatterns="$exclude" --shard=${{ matrix.shard.shard }}/${{ matrix.shard.total }} --json --outputFile=jest-results.json
@@ -233,7 +253,8 @@ jobs:
       - name: report slow tests
         if: always() && hashFiles('jest-results.json') != ''
         run: |
-          jq -r '.testResults[] | "\(.name):\(.perfStats.runtime)"' jest-results.json | while IFS=: read -r name runtime; do
+          set -eu
+          jq -r '.testResults[] | select(.perfStats.runtime != null) | "\(.name):\(.perfStats.runtime)"' jest-results.json | while IFS=: read -r name runtime; do
             seconds=$((runtime / 1000))
             if [[ $seconds -ge 30 ]]; then
               echo "::warning file=${name}::slow test: ${seconds}s"
@@ -264,6 +285,21 @@ jobs:
           path: ./node_modules
           key: ${{ needs.install.outputs.node-modules-cache-key }}
 
+      # .why = keyrack.yml can extend other manifests via symlinks (e.g., .agent/repo=ehmpathy/role=mechanic/keyrack.yml)
+      #        prepare:rhachet creates these symlinks so keyrack.source() can hydrate extended keys
+      - name: prepare:rhachet
+        run: npm run prepare:rhachet --if-present
+
+      # .why = keyrack firewall translates and validates secrets before tests run
+      #        - filters to declared keys in keyrack.yml
+      #        - translates mechanisms (e.g., GitHub App → ghs_* token)
+      #        - blocks dangerous patterns (ghp_*, AKIA*, etc.)
+      #        - exports to $GITHUB_ENV with mask applied
+      - name: keyrack firewall
+        run: npx rhachet keyrack firewall --env test --from 'json(env://SECRETS_JSON)' --into github.actions
+        env:
+          SECRETS_JSON: ${{ toJSON(secrets) }}
+
       - name: get aws auth, if creds supplied
         if: ${{ inputs.creds-aws-role-arn }}
         uses: aws-actions/configure-aws-credentials@v4
@@ -283,12 +319,14 @@ jobs:
       - name: test:acceptance (explicit ${{ matrix.shard.index }})
         if: matrix.shard.type == 'explicit'
         run: |
+          set -eu
           patterns='${{ join(matrix.shard.patterns, '|') }}'
-          THOROUGH=true npm run test:acceptance -- --testPathPattern="$patterns" --json --outputFile=jest-results.json
+          THOROUGH=true npm run test:acceptance -- --testPathPatterns="$patterns" --json --outputFile=jest-results.json
 
       - name: test:acceptance (dynamic ${{ matrix.shard.shard }}/${{ matrix.shard.total }})
         if: matrix.shard.type == 'dynamic'
         run: |
+          set -eu
           exclude='${{ needs.enshard.outputs.acceptance-patterns }}'
           if [[ -n "$exclude" ]]; then
             THOROUGH=true npm run test:acceptance -- --testPathIgnorePatterns="$exclude" --shard=${{ matrix.shard.shard }}/${{ matrix.shard.total }} --json --outputFile=jest-results.json
@@ -299,7 +337,8 @@ jobs:
       - name: report slow tests
         if: always() && hashFiles('jest-results.json') != ''
         run: |
-          jq -r '.testResults[] | "\(.name):\(.perfStats.runtime)"' jest-results.json | while IFS=: read -r name runtime; do
+          set -eu
+          jq -r '.testResults[] | select(.perfStats.runtime != null) | "\(.name):\(.perfStats.runtime)"' jest-results.json | while IFS=: read -r name runtime; do
             seconds=$((runtime / 1000))
             if [[ $seconds -ge 30 ]]; then
               echo "::warning file=${name}::slow test: ${seconds}s"
@@ -316,6 +355,7 @@ jobs:
     steps:
       - name: report shard results
         run: |
+          set -eu
           if [[ "${{ needs.test-shards-integration.result }}" == "success" ]]; then
             echo "👌 all integration test shards passed"
           else
@@ -331,6 +371,7 @@ jobs:
     steps:
       - name: report shard results
         run: |
+          set -eu
           if [[ "${{ needs.test-shards-acceptance.result }}" == "success" ]]; then
             echo "👌 all acceptance test shards passed"
           else

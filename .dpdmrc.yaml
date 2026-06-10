@@ -1,0 +1,6 @@
+# dpdm exclude patterns
+# each entry is joined with | to form a single regex for --exclude
+#
+# only exclude devDependencies here
+# if you exclude a prod dependency, you ship cycles to consumers and break their builds
+exclude: []

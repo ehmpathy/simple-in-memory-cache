@@ -2,8 +2,11 @@
 *.local.json
 *.log
 *.tsbuildinfo
+.agent/.cache/
 .artifact
+.cache/
 .env
+.log/slowtest/
 .serverless
 .temp
 .terraform
@@ -13,3 +16,5 @@
 coverage
 dist
 node_modules
+!.test*/**/node_modules
+!.test*/**/node_modules/**
