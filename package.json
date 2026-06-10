@@ -60,7 +60,7 @@
     "preversion": "npm run prepush",
     "postversion": "git push origin HEAD --tags --no-verify",
     "prepare:husky": "husky install && chmod ug+x .husky/*",
-    "prepare:rhachet": "rhachet init --keys --hooks --roles mechanic behaver driver reviewer librarian ergonomist architect",
+    "prepare:rhachet": "rhachet init --keys --hooks --roles mechanic behaver driver reviewer librarian ergonomist architect dispatcher",
     "prepare": "if [ -e .git ] && [ -z $CI ]; then npm run prepare:husky && npm run prepare:rhachet; fi",
     "test:lint:cycles": "dpdm --no-warning --no-tree --exit-code circular:1 --exclude \"$(yq -r '.exclude | join(\"|\") // \"^$\"' .dpdmrc.yaml)\" 'src/**/*.ts'",
     "upgrade:rhachet": "rhachet upgrade"
