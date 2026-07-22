@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`index (published contract) — the three conditional-write journeys given: [case1] pattern 1 — put-if-absent claim/converge (stampede control) when: [t0] two workers race the same open key then: the loser error text is stable for a consumer 1`] = `
+"✋ SimpleCacheConditionError: cache condition failed: expected key 'compute:slot' to be absent, but found a live entry at version <uuid-1>
+
+{
+  "key": "compute:slot",
+  "condition": {
+    "version": null
+  },
+  "found": "<uuid-1>"
+}"
+`;
+
+exports[`index (published contract) — the three conditional-write journeys given: [case1] pattern 1 — put-if-absent claim/converge (stampede control) when: [t0] two workers race the same open key then: the winner holds the slot 1`] = `"worker-a"`;
+
+exports[`index (published contract) — the three conditional-write journeys given: [case2] pattern 2 — mutex acquire → renew → release when: [t0] one holder walks the full lock lifecycle via the barrel then: each step guards on the held token and the lock ends open 1`] = `undefined`;
+
+exports[`index (published contract) — the three conditional-write journeys given: [case2] pattern 2 — mutex acquire → renew → release when: [t0] one holder walks the full lock lifecycle via the barrel then: each step guards on the held token and the lock ends open 2`] = `""`;
+
+exports[`index (published contract) — the three conditional-write journeys given: [case2] pattern 2 — mutex acquire → renew → release when: [t1] a stale holder tries to release a lock taken by another then: b's lock is not clobbered by the stale release 1`] = `"worker-b"`;
+
+exports[`index (published contract) — the three conditional-write journeys given: [case2] pattern 2 — mutex acquire → renew → release when: [t1] a stale holder tries to release a lock taken by another then: the release-conflict message is stable for a consumer 1`] = `
+"✋ SimpleCacheConditionError: cache condition failed: expected key 'lock:report' to match version <uuid-1>, but found a live entry at version <uuid-2>
+
+{
+  "key": "lock:report",
+  "condition": {
+    "version": "<uuid-1>"
+  },
+  "found": "<uuid-2>"
+}"
+`;
+
+exports[`index (published contract) — the three conditional-write journeys given: [case3] pattern 3 — optimistic round-trip (the vision star usecase) when: [t0] read-compute-write-back guarded on the observed version then: the write-back commits when the version still holds 1`] = `"2"`;
+
+exports[`index (published contract) — the three conditional-write journeys given: [case3] pattern 3 — optimistic round-trip (the vision star usecase) when: [t1] a racer moves the value between read and write-back then: the mismatch message is stable for a consumer 1`] = `
+"✋ SimpleCacheConditionError: cache condition failed: expected key 'counter' to match version <uuid-1>, but found a live entry at version <uuid-2>
+
+{
+  "key": "counter",
+  "condition": {
+    "version": "<uuid-1>"
+  },
+  "found": "<uuid-2>"
+}"
+`;

@@ -5,6 +5,9 @@ import util from 'node:util';
 import { jest } from '@jest/globals';
 import { keyrack } from 'rhachet/keyrack';
 
+// register the uuid snapshot serializer so opaque version tokens mask to stable <uuid-N> placeholders
+import './jest.serializer.uuid';
+
 jest.setTimeout(90000); // we're calling downstream apis
 
 // set console.log to not truncate nested objects
