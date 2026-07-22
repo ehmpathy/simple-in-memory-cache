@@ -1,3 +1,6 @@
+// register the uuid snapshot serializer so opaque version tokens mask to stable <uuid-N> placeholders
+import './jest.serializer.uuid';
+
 /**
  * sanity check that unit tests are only run the 'test' environment
  *

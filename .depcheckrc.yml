@@ -24,6 +24,7 @@ ignores:
   - yalc
   - rhachet-brains-anthropic
   - rhachet-brains-xai
+  - rhachet-brains-fireworksai
   - test-fns
   - type-fns
   - dpdm

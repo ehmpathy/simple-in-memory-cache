@@ -1,0 +1,113 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`cache.conditionals given: [case2] put-if-absent (condition.version: null) when: [t0] the key is open then: the write succeeds 1`] = `"worker-a"`;
+
+exports[`cache.conditionals given: [case3] compare-and-set (condition.version: token) when: [t0] the stored version matches the token then: the write succeeds 1`] = `"b"`;
+
+exports[`cache.conditionals given: [case4] version-checked get when: [t0] the version matches then: the value is returned 1`] = `"1"`;
+
+exports[`cache.conditionals given: [case4] version-checked get when: [t1] the version has drifted then: the read throws SimpleCacheConditionError 1`] = `
+"✋ SimpleCacheConditionError: cache condition failed: expected key 'counter' to match version <uuid-1>, but found a live entry at version <uuid-2>
+
+{
+  "key": "counter",
+  "condition": {
+    "version": "<uuid-1>"
+  },
+  "found": "<uuid-2>"
+}"
+`;
+
+exports[`cache.conditionals given: [case4] version-checked get when: [t2] a null condition (must-be-absent) on get then: a present key throws SimpleCacheConditionError 1`] = `
+"✋ SimpleCacheConditionError: cache condition failed: expected key 'counter' to be absent, but found a live entry at version <uuid-1>
+
+{
+  "key": "counter",
+  "condition": {
+    "version": null
+  },
+  "found": "<uuid-1>"
+}"
+`;
+
+exports[`cache.conditionals given: [case4] version-checked get when: [t2] a null condition (must-be-absent) on get then: an absent key returns undefined 1`] = `undefined`;
+
+exports[`cache.conditionals given: [case4] version-checked get when: [t3] a token condition on an absent key then: the read throws SimpleCacheConditionError (cannot CAS-read what is absent) 1`] = `
+"✋ SimpleCacheConditionError: cache condition failed: expected key 'counter' to match version v-ghost, but found no live entry
+
+{
+  "key": "counter",
+  "condition": {
+    "version": "v-ghost"
+  },
+  "found": null
+}"
+`;
+
+exports[`cache.conditionals given: [case5] an expired entry is treated as absent when: [t0] a key was set with immediate expiration then: put-if-absent succeeds after expiry 1`] = `"worker-b"`;
+
+exports[`cache.conditionals given: [case5] an expired entry is treated as absent when: [t0] a key was set with immediate expiration then: version returns undefined for the expired key 1`] = `undefined`;
+
+exports[`cache.conditionals given: [case6] conditional delete (compare-and-delete = mutex release) when: [t0] the holder releases on its own version then: the delete succeeds and the key becomes open 1`] = `undefined`;
+
+exports[`cache.conditionals given: [case6] conditional delete (compare-and-delete = mutex release) when: [t1] a stale holder tries to release a lock taken by another then: the delete throws SimpleCacheConditionError (no clobber) 1`] = `
+"✋ SimpleCacheConditionError: cache condition failed: expected key 'lock' to match version <uuid-1>, but found a live entry at version <uuid-2>
+
+{
+  "key": "lock",
+  "condition": {
+    "version": "<uuid-1>"
+  },
+  "found": "<uuid-2>"
+}"
+`;
+
+exports[`cache.conditionals given: [case10] error messages are locked by snapshot when: [t0] a put-if-absent conflict is thrown then: the full message matches the snapshot 1`] = `
+"✋ SimpleCacheConditionError: cache condition failed: expected key 'lock' to be absent, but found a live entry at version <uuid-1>
+
+{
+  "key": "lock",
+  "condition": {
+    "version": null
+  },
+  "found": "<uuid-1>"
+}"
+`;
+
+exports[`cache.conditionals given: [case10] error messages are locked by snapshot when: [t1] a compare-and-set mismatch is thrown then: the full message matches the snapshot 1`] = `
+"✋ SimpleCacheConditionError: cache condition failed: expected key 'k' to match version <uuid-1>, but found a live entry at version <uuid-2>
+
+{
+  "key": "k",
+  "condition": {
+    "version": "<uuid-1>"
+  },
+  "found": "<uuid-2>"
+}"
+`;
+
+exports[`cache.conditionals given: [case10] error messages are locked by snapshot when: [t2] a compare-and-set against an absent key is thrown then: the full message matches the snapshot 1`] = `
+"✋ SimpleCacheConditionError: cache condition failed: expected key 'k' to match version v-ghost, but found no live entry
+
+{
+  "key": "k",
+  "condition": {
+    "version": "v-ghost"
+  },
+  "found": null
+}"
+`;
+
+exports[`cache.conditionals given: [case10] error messages are locked by snapshot when: [t3] a success path returns contract output then: get returns the stored value 1`] = `"worker-a"`;
+
+exports[`cache.conditionals given: [case10] error messages are locked by snapshot when: [t3] a success path returns contract output then: version mints a token for the stored key 1`] = `"<uuid-1>"`;
+
+exports[`cache.conditionals given: [case10] error messages are locked by snapshot when: [t3] a success path returns contract output then: version of an absent key is undefined 1`] = `undefined`;
+
+exports[`cache.conditionals given: [case11] the version() ?? null idiom unifies create-if-absent and update-if-unchanged when: [t0] the key is absent (v is undefined → null) then: the idiom takes the put-if-absent branch and writes 1`] = `"first"`;
+
+exports[`cache.conditionals given: [case11] the version() ?? null idiom unifies create-if-absent and update-if-unchanged when: [t1] the key is present and unchanged (v is a token → CAS) then: the idiom takes the compare-and-set branch and writes 1`] = `"second"`;
+
+exports[`cache.conditionals given: [case13] conditional writes keep keys() consistent when: [t0] a compare-and-delete releases the key then: keys() no longer lists it 1`] = `""`;
+
+exports[`cache.conditionals given: [case13] conditional writes keep keys() consistent when: [t1] a put-if-absent loses the race then: keys() lists the key exactly once (no phantom) 1`] = `"lock"`;

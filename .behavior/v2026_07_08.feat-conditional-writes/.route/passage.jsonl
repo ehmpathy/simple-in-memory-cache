@@ -1,0 +1,63 @@
+{"stone":"1.vision","status":"blocked","blocker":"review.self","reason":"review.self required: has-grounded-in-reality"}
+{"stone":"1.vision","status":"blocked","blocker":"approval","reason":"wait for human approval"}
+{"stone":"1.vision","status":"approved"}
+{"stone":"1.vision","status":"passed"}
+{"stone":"5.1.execution.from_vision","status":"blocked","blocker":"review.self","reason":"review.self required: has-pruned-yagni"}
+{"stone":"5.1.execution.from_vision","status":"blocked","blocker":"review.self","reason":"review.self required: role-standards-coverage"}
+{"stone":"5.1.execution.from_vision","status":"malfunction"}
+{"stone":"5.1.execution.from_vision","status":"malfunction"}
+{"stone":"5.1.execution.from_vision","status":"malfunction"}
+{"stone":"5.1.execution.from_vision","status":"blocked"}
+{"stone":"5.1.execution.from_vision","status":"blocked"}
+{"stone":"5.1.execution.from_vision","status":"blocked"}
+{"stone":"5.1.execution.from_vision","status":"blocked"}
+{"stone":"5.1.execution.from_vision","status":"blocked","blocker":"review.peer.exhausted","reason":"peer reviewer budget exhausted: arch-hazards-maintenance, behavior-intent-coverage"}
+{"stone":"5.1.execution.from_vision","status":"malfunction"}
+{"stone":"5.1.execution.from_vision","status":"blocked"}
+{"stone":"5.1.execution.from_vision","status":"blocked"}
+{"stone":"5.1.execution.from_vision","status":"blocked","blocker":"review.peer.exhausted","reason":"peer reviewer budget exhausted: mech-failhides, ergo-friction-hazards"}
+{"stone":"5.1.execution.from_vision","status":"malfunction"}
+{"stone":"5.1.execution.from_vision","status":"malfunction"}
+{"stone":"5.1.execution.from_vision","status":"blocked"}
+{"stone":"5.1.execution.from_vision","status":"blocked"}
+{"stone":"5.1.execution.from_vision","status":"blocked"}
+{"stone":"5.1.execution.from_vision","status":"blocked"}
+{"stone":"5.1.execution.from_vision","status":"blocked"}
+{"stone":"5.1.execution.from_vision","status":"blocked"}
+{"stone":"5.1.execution.from_vision","status":"blocked"}
+{"stone":"5.1.execution.from_vision","status":"blocked"}
+{"stone":"5.1.execution.from_vision","status":"blocked"}
+{"stone":"5.1.execution.from_vision","status":"blocked"}
+{"stone":"5.1.execution.from_vision","status":"overruled","level":1}
+{"stone":"5.1.execution.from_vision","status":"blocked","blocker":"review.peer","reason":"nitpicks exceed threshold (6 > 3)"}
+{"stone":"5.1.execution.from_vision","status":"blocked","blocker":"review.peer","reason":"blockers exceed threshold (1 > 0)"}
+{"stone":"5.1.execution.from_vision","status":"blocked","blocker":"review.peer","reason":"no review files found for hash d22e8af8"}
+{"stone":"5.1.execution.from_vision","status":"blocked","blocker":"review.peer","reason":"blockers exceed threshold (1 > 0)"}
+{"stone":"5.1.execution.from_vision","status":"blocked","blocker":"review.peer","reason":"nitpicks exceed threshold (7 > 3)"}
+{"stone":"5.1.execution.from_vision","status":"blocked"}
+{"stone":"5.1.execution.from_vision","status":"overruled","level":3}
+{"stone":"5.1.execution.from_vision","status":"approved"}
+{"stone":"5.1.execution.from_vision","status":"passed"}
+{"stone":"5.3.verification","status":"blocked","blocker":"review.self","reason":"review.self required: has-behavior-coverage"}
+{"stone":"5.3.verification","status":"blocked"}
+{"stone":"5.3.verification","status":"blocked"}
+{"stone":"5.3.verification","status":"blocked"}
+{"stone":"5.3.verification","status":"overruled","level":1}
+{"stone":"5.3.verification","status":"blocked","blocker":"review.peer","reason":"nitpicks exceed threshold (4 > 0)"}
+{"stone":"5.3.verification","status":"blocked","blocker":"review.peer","reason":"nitpicks exceed threshold (4 > 0)"}
+{"stone":"5.3.verification","status":"blocked","blocker":"review.peer","reason":"nitpicks exceed threshold (3 > 0)"}
+{"stone":"5.3.verification","status":"blocked","blocker":"review.peer.exhausted","reason":"peer reviewer budget exhausted: enroll-verif-snapshot-coverage, enroll-verif-snapshot-blemishes"}
+{"stone":"5.3.verification","status":"blocked","blocker":"review.peer","reason":"blockers exceed threshold (2 > 0)"}
+{"stone":"5.3.verification","status":"blocked","blocker":"review.peer","reason":"blockers exceed threshold (2 > 0)"}
+{"stone":"5.3.verification","status":"blocked","blocker":"review.peer","reason":"nitpicks exceed threshold (2 > 0)"}
+{"stone":"5.3.verification","status":"blocked","blocker":"review.peer.exhausted","reason":"peer reviewer budget exhausted: enroll-verif-snapshot-coverage"}
+{"stone":"5.3.verification","status":"blocked","blocker":"review.peer","reason":"blockers exceed threshold (1 > 0)"}
+{"stone":"5.3.verification","status":"blocked","blocker":"review.peer","reason":"nitpicks exceed threshold (1 > 0)"}
+{"stone":"5.3.verification","status":"blocked","blocker":"review.peer","reason":"nitpicks exceed threshold (1 > 0)"}
+{"stone":"5.3.verification","status":"blocked","blocker":"review.peer.exhausted","reason":"peer reviewer budget exhausted: enroll-verif-snapshot-coverage"}
+{"stone":"5.3.verification","status":"blocked","blocker":"review.peer","reason":"blockers exceed threshold (2 > 0)"}
+{"stone":"5.3.verification","status":"blocked","blocker":"review.peer","reason":"blockers exceed threshold (2 > 0)"}
+{"stone":"5.3.verification","status":"blocked"}
+{"stone":"5.3.verification","status":"overruled","level":3}
+{"stone":"5.3.verification","status":"approved"}
+{"stone":"5.3.verification","status":"passed"}
