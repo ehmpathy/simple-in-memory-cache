@@ -49,7 +49,10 @@ jobs:
           MIN_VERSION="11.5.1"
           if [ "$(printf '%s\n' "$MIN_VERSION" "$NPM_VERSION" | sort -V | head -n1)" != "$MIN_VERSION" ]; then
             echo "npm $NPM_VERSION < $MIN_VERSION, will upgrade npm now to support oidc..."
-            npm install -g npm@latest
+            # pin to npm@11 (not @latest): @latest is npm@12+, which requires node >=22.22.2 and so
+            # EBADENGINE-fails on the .nvmrc-pinned node 22.21.0. npm@11 supports oidc (>=11.5.1) and
+            # runs on node 22.21.0. see cicd fix — publish job failed on v0.5.0 with npm@12.0.1.
+            npm install -g npm@11
           else
             echo "npm $NPM_VERSION >= $MIN_VERSION, ready to use!"
           fi
